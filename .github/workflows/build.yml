@@ -63,6 +63,43 @@ jobs:
           curl -sSL "https://raw.githubusercontent.com/runetfreedom/russia-blocked-geoip/release/geoip-asn.dat" -o geoip-asn.dat
           cat ./geoip-ru.dat ./geoip-asn.dat > ./publish/geoip-direct.dat
 
+      - name: Build mihomo rule sets
+        run: |
+          mkdir -p ./publish/ruleset
+          python3 - <<'PY'
+          domains = set()
+          for p in ["community/data/antifilter-download-community", "community/data/refilter"]:
+              with open(p, encoding="utf-8", errors="ignore") as f:
+                  for line in f:
+                      line = line.strip()
+                      if not line or line.startswith("#"):
+                          continue
+                      line = line.split("@")[0].strip()
+                      for pref in ("domain:", "full:", "keyword:", "regexp:"):
+                          if line.startswith(pref):
+                              line = line[len(pref):].strip()
+                              break
+                      if not line:
+                          continue
+                      domains.add(line.lower())
+          with open("publish/ruleset/ru-blocked-domain.yaml", "w", encoding="utf-8") as f:
+              f.write("payload:\n")
+              for d in sorted(domains):
+                  f.write("  - '+.%s'\n" % d)
+          print("domain rules:", len(domains))
+          PY
+          for name in ru-blocked ru-blocked-community; do
+            curl -sSL "https://raw.githubusercontent.com/runetfreedom/russia-blocked-geoip/release/text/$name.txt" -o "/tmp/$name.txt"
+            echo "payload:" > "./publish/ruleset/$name-ip.yaml"
+            grep -E '^[0-9a-fA-F:.]+/[0-9]{1,3}$' "/tmp/$name.txt" | sed "s/^/  - '/; s/$/'/" >> "./publish/ruleset/$name-ip.yaml"
+          done
+
+      - name: Build sha256
+        run: |
+          cd ./publish
+          sha256sum geosite-direct.dat > geosite-direct.dat.sha256
+          sha256sum geoip-direct.dat > geoip-direct.dat.sha256
+
       - name: Push to release branch
         run: |
           cd ./publish
