@@ -1,0 +1,334 @@
+# Mihomo (Clash.Meta) ruleset, аналог профиля HAPP/INCY:
+#   реклама -> REJECT, заблокированное в РФ -> PROXY, РФ-сервисы -> DIRECT, остальное -> PROXY
+# Вставь rule-providers в config.yaml, rules — в начало секции rules.
+# PROXY замени на имя своей прокси-группы. geosite/geoip — MetaCubeX meta-rules-dat (mrs),
+# RU-блокировки и IP-листы — kosnag/russia-blocked-geosite (обновляются ежедневно).
+
+rule-providers:
+  ads:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ads-all.mrs"
+    path: ./ruleset/ads.mrs
+    interval: 86400
+  ru-blocked:
+    type: http
+    behavior: domain
+    format: yaml
+    url: "https://raw.githubusercontent.com/kosnag/russia-blocked-geosite/release/ruleset/ru-blocked-domain.yaml"
+    path: ./ruleset/ru-blocked.yaml
+    interval: 86400
+  ru-blocked-ip:
+    type: http
+    behavior: ipcidr
+    format: yaml
+    url: "https://raw.githubusercontent.com/kosnag/russia-blocked-geosite/release/ruleset/ru-blocked-ip.yaml"
+    path: ./ruleset/ru-blocked-ip.yaml
+    interval: 86400
+  ru-blocked-community-ip:
+    type: http
+    behavior: ipcidr
+    format: yaml
+    url: "https://raw.githubusercontent.com/kosnag/russia-blocked-geosite/release/ruleset/ru-blocked-community-ip.yaml"
+    path: ./ruleset/ru-blocked-community-ip.yaml
+    interval: 86400
+  d-category-game-platforms-download:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-game-platforms-download.mrs"
+    path: ./ruleset/d-category-game-platforms-download.mrs
+    interval: 86400
+  d-2gis:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/2gis.mrs"
+    path: ./ruleset/d-2gis.mrs
+    interval: 86400
+  d-aviasales:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/aviasales.mrs"
+    path: ./ruleset/d-aviasales.mrs
+    interval: 86400
+  d-avito:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/avito.mrs"
+    path: ./ruleset/d-avito.mrs
+    interval: 86400
+  d-kaspersky:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/kaspersky.mrs"
+    path: ./ruleset/d-kaspersky.mrs
+    interval: 86400
+  d-category-bank-ru:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-bank-ru.mrs"
+    path: ./ruleset/d-category-bank-ru.mrs
+    interval: 86400
+  d-category-betting-ru:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-betting-ru.mrs"
+    path: ./ruleset/d-category-betting-ru.mrs
+    interval: 86400
+  d-category-ecommerce-ru:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ecommerce-ru.mrs"
+    path: ./ruleset/d-category-ecommerce-ru.mrs
+    interval: 86400
+  d-category-education-ru:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-education-ru.mrs"
+    path: ./ruleset/d-category-education-ru.mrs
+    interval: 86400
+  d-category-entertainment-ru:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-entertainment-ru.mrs"
+    path: ./ruleset/d-category-entertainment-ru.mrs
+    interval: 86400
+  d-category-forums-ru:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-forums-ru.mrs"
+    path: ./ruleset/d-category-forums-ru.mrs
+    interval: 86400
+  d-category-gov-ru:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-gov-ru.mrs"
+    path: ./ruleset/d-category-gov-ru.mrs
+    interval: 86400
+  d-category-media-ru:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-media-ru.mrs"
+    path: ./ruleset/d-category-media-ru.mrs
+    interval: 86400
+  d-category-medicine-ru:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-medicine-ru.mrs"
+    path: ./ruleset/d-category-medicine-ru.mrs
+    interval: 86400
+  d-category-retail-ru:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-retail-ru.mrs"
+    path: ./ruleset/d-category-retail-ru.mrs
+    interval: 86400
+  d-category-travel-ru:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-travel-ru.mrs"
+    path: ./ruleset/d-category-travel-ru.mrs
+    interval: 86400
+  d-genotek-ru:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/genotek-ru.mrs"
+    path: ./ruleset/d-genotek-ru.mrs
+    interval: 86400
+  d-ideco-ru:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ideco-ru.mrs"
+    path: ./ruleset/d-ideco-ru.mrs
+    interval: 86400
+  d-mts-ru:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/mts-ru.mrs"
+    path: ./ruleset/d-mts-ru.mrs
+    interval: 86400
+  d-myoffice-ru:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/myoffice-ru.mrs"
+    path: ./ruleset/d-myoffice-ru.mrs
+    interval: 86400
+  d-nic-ru:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/nic-ru.mrs"
+    path: ./ruleset/d-nic-ru.mrs
+    interval: 86400
+  d-overclockers-ru:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/overclockers-ru.mrs"
+    path: ./ruleset/d-overclockers-ru.mrs
+    interval: 86400
+  d-t2-ru:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/t2-ru.mrs"
+    path: ./ruleset/d-t2-ru.mrs
+    interval: 86400
+  d-tbank-ru:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tbank-ru.mrs"
+    path: ./ruleset/d-tbank-ru.mrs
+    interval: 86400
+  d-tld-ru:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tld-ru.mrs"
+    path: ./ruleset/d-tld-ru.mrs
+    interval: 86400
+  d-okko:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/okko.mrs"
+    path: ./ruleset/d-okko.mrs
+    interval: 86400
+  d-x5:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/x5.mrs"
+    path: ./ruleset/d-x5.mrs
+    interval: 86400
+  d-kinopoisk:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/kinopoisk.mrs"
+    path: ./ruleset/d-kinopoisk.mrs
+    interval: 86400
+  d-rutube:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/rutube.mrs"
+    path: ./ruleset/d-rutube.mrs
+    interval: 86400
+  d-sber:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/sber.mrs"
+    path: ./ruleset/d-sber.mrs
+    interval: 86400
+  d-vk:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/vk.mrs"
+    path: ./ruleset/d-vk.mrs
+    interval: 86400
+  d-wildberries:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/wildberries.mrs"
+    path: ./ruleset/d-wildberries.mrs
+    interval: 86400
+  d-yandex:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/yandex.mrs"
+    path: ./ruleset/d-yandex.mrs
+    interval: 86400
+  d-private:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
+    path: ./ruleset/d-private.mrs
+    interval: 86400
+  d-ru-available-only-inside:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ru-available-only-inside.mrs"
+    path: ./ruleset/d-ru-available-only-inside.mrs
+    interval: 86400
+  d-magnit:
+    type: http
+    behavior: domain
+    format: mrs
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/magnit.mrs"
+    path: ./ruleset/d-magnit.mrs
+    interval: 86400
+
+rules:
+  - RULE-SET,ads,REJECT
+  - RULE-SET,ru-blocked,PROXY
+  - RULE-SET,ru-blocked-ip,PROXY,no-resolve
+  - RULE-SET,ru-blocked-community-ip,PROXY,no-resolve
+  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+  - IP-CIDR,169.254.0.0/16,DIRECT,no-resolve
+  - RULE-SET,d-category-game-platforms-download,DIRECT
+  - RULE-SET,d-2gis,DIRECT
+  - RULE-SET,d-aviasales,DIRECT
+  - RULE-SET,d-avito,DIRECT
+  - RULE-SET,d-kaspersky,DIRECT
+  - RULE-SET,d-category-bank-ru,DIRECT
+  - RULE-SET,d-category-betting-ru,DIRECT
+  - RULE-SET,d-category-ecommerce-ru,DIRECT
+  - RULE-SET,d-category-education-ru,DIRECT
+  - RULE-SET,d-category-entertainment-ru,DIRECT
+  - RULE-SET,d-category-forums-ru,DIRECT
+  - RULE-SET,d-category-gov-ru,DIRECT
+  - RULE-SET,d-category-media-ru,DIRECT
+  - RULE-SET,d-category-medicine-ru,DIRECT
+  - RULE-SET,d-category-retail-ru,DIRECT
+  - RULE-SET,d-category-travel-ru,DIRECT
+  - RULE-SET,d-genotek-ru,DIRECT
+  - RULE-SET,d-ideco-ru,DIRECT
+  - RULE-SET,d-mts-ru,DIRECT
+  - RULE-SET,d-myoffice-ru,DIRECT
+  - RULE-SET,d-nic-ru,DIRECT
+  - RULE-SET,d-overclockers-ru,DIRECT
+  - RULE-SET,d-t2-ru,DIRECT
+  - RULE-SET,d-tbank-ru,DIRECT
+  - RULE-SET,d-tld-ru,DIRECT
+  - RULE-SET,d-okko,DIRECT
+  - RULE-SET,d-x5,DIRECT
+  - RULE-SET,d-kinopoisk,DIRECT
+  - RULE-SET,d-rutube,DIRECT
+  - RULE-SET,d-sber,DIRECT
+  - RULE-SET,d-vk,DIRECT
+  - RULE-SET,d-wildberries,DIRECT
+  - RULE-SET,d-yandex,DIRECT
+  - RULE-SET,d-private,DIRECT
+  - RULE-SET,d-ru-available-only-inside,DIRECT
+  - RULE-SET,d-magnit,DIRECT
+  - MATCH,PROXY
