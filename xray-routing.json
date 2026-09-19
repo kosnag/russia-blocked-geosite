@@ -10,21 +10,6 @@
                                   },
                                   {
                                       "domain":  [
-                                                     "geosite:ru-blocked"
-                                                 ],
-                                      "outboundTag":  "proxy",
-                                      "type":  "field"
-                                  },
-                                  {
-                                      "ip":  [
-                                                 "geoip:ru-blocked",
-                                                 "geoip:ru-blocked-community"
-                                             ],
-                                      "outboundTag":  "proxy",
-                                      "type":  "field"
-                                  },
-                                  {
-                                      "domain":  [
                                                      "geosite:category-game-platforms-download",
                                                      "geosite:2gis",
                                                      "geosite:aviasales",
