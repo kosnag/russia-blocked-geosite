@@ -57,6 +57,12 @@ jobs:
           cd ./community
           go run ./ --datapath=./data --datprofile=../profile.json --outputdir=../publish
 
+      - name: Build custom geoip
+        run: |
+          curl -sSL "https://raw.githubusercontent.com/runetfreedom/russia-blocked-geoip/release/geoip-ru-only.dat" -o geoip-ru.dat
+          curl -sSL "https://raw.githubusercontent.com/runetfreedom/russia-blocked-geoip/release/geoip-asn.dat" -o geoip-asn.dat
+          cat ./geoip-ru.dat ./geoip-asn.dat > ./publish/geoip-direct.dat
+
       - name: Push to release branch
         run: |
           cd ./publish
