@@ -55,7 +55,7 @@ jobs:
         run: |
           mkdir -p ./publish
           cd ./community
-          go run ./ --datpath=./data --datprofile=../profile.json --outputdir=../publish
+          go run ./ --datapath=./data --datprofile=../profile.json --outputdir=../publish
 
       - name: Push to release branch
         run: |
