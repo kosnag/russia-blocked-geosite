@@ -1,8 +1,7 @@
 # Mihomo (Clash.Meta) ruleset, аналог профиля HAPP/INCY:
-#   реклама -> REJECT, заблокированное в РФ -> PROXY, РФ-сервисы -> DIRECT, остальное -> PROXY
+#   реклама -> REJECT, РФ-сервисы и приватное -> DIRECT, всё остальное -> PROXY
 # Вставь rule-providers в config.yaml, rules — в начало секции rules.
-# PROXY замени на имя своей прокси-группы. geosite/geoip — MetaCubeX meta-rules-dat (mrs),
-# RU-блокировки и IP-листы — kosnag/russia-blocked-geosite (обновляются ежедневно).
+# PROXY замени на имя своей прокси-группы. Списки geosite — MetaCubeX meta-rules-dat (mrs).
 
 rule-providers:
   ads:
@@ -11,27 +10,6 @@ rule-providers:
     format: mrs
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ads-all.mrs"
     path: ./ruleset/ads.mrs
-    interval: 86400
-  ru-blocked:
-    type: http
-    behavior: domain
-    format: yaml
-    url: "https://raw.githubusercontent.com/kosnag/russia-blocked-geosite/release/ruleset/ru-blocked-domain.yaml"
-    path: ./ruleset/ru-blocked.yaml
-    interval: 86400
-  ru-blocked-ip:
-    type: http
-    behavior: ipcidr
-    format: yaml
-    url: "https://raw.githubusercontent.com/kosnag/russia-blocked-geosite/release/ruleset/ru-blocked-ip.yaml"
-    path: ./ruleset/ru-blocked-ip.yaml
-    interval: 86400
-  ru-blocked-community-ip:
-    type: http
-    behavior: ipcidr
-    format: yaml
-    url: "https://raw.githubusercontent.com/kosnag/russia-blocked-geosite/release/ruleset/ru-blocked-community-ip.yaml"
-    path: ./ruleset/ru-blocked-community-ip.yaml
     interval: 86400
   d-category-game-platforms-download:
     type: http
@@ -288,9 +266,6 @@ rule-providers:
 
 rules:
   - RULE-SET,ads,REJECT
-  - RULE-SET,ru-blocked,PROXY
-  - RULE-SET,ru-blocked-ip,PROXY,no-resolve
-  - RULE-SET,ru-blocked-community-ip,PROXY,no-resolve
   - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
   - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
